@@ -103,7 +103,7 @@ function addAdminPageContent() {
 }
 function crudAdminPage() {
   global $wpdb;
-  $table_name = $wpdb->prefix . 'userstable';
+  $table_name = $wpdb->prefix .'crud';
   if (isset($_POST['newsubmit'])) {
 	$name = $_POST['newname'];
 	$email = $_POST['newemail'];
