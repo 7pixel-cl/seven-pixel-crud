@@ -108,7 +108,7 @@ function crudAdminPage() {
 	$name = $_POST['newname'];
 	$email = $_POST['newemail'];
 	$wpdb->query("INSERT INTO $table_name(name,email) VALUES('$name','$email')");
-	echo "<script>location.replace('admin.php?page=seven-pixel-crud/seven-pixel-crud.php');</script>";
+	//echo "<script>location.replace('admin.php?page=seven-pixel-crud/seven-pixel-crud.php');</script>";
   }
   if (isset($_POST['uptsubmit'])) {
 	$id = $_POST['uptid'];
