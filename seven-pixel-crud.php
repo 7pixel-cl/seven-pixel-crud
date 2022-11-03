@@ -108,19 +108,19 @@ function crudAdminPage() {
 	$name = $_POST['newname'];
 	$email = $_POST['newemail'];
 	$wpdb->query("INSERT INTO $table_name(name,email) VALUES('$name','$email')");
-	echo "<script>location.replace('admin.php?page=seven-pixel-crud%2Fseven-pixel-crud.php');</script>";
+	//echo "<script>location.replace('admin.php?page=seven-pixel-crud%2Fseven-pixel-crud.php');</script>";
   }
   if (isset($_POST['uptsubmit'])) {
 	$id = $_POST['uptid'];
 	$name = $_POST['uptname'];
 	$email = $_POST['uptemail'];
 	$wpdb->query("UPDATE $table_name SET name='$name',email='$email' WHERE user_id='$id'");
-	echo "<script>location.replace('admin.php?page=seven-pixel-crud.php');</script>";
+	//echo "<script>location.replace('admin.php?page=seven-pixel-crud.php');</script>";
   }
   if (isset($_GET['del'])) {
 	$del_id = $_GET['del'];
 	$wpdb->query("DELETE FROM $table_name WHERE user_id='$del_id'");
-	echo "<script>location.replace('admin.php?page=seven-pixel-crud.php');</script>";
+	//echo "<script>location.replace('admin.php?page=seven-pixel-crud.php');</script>";
   }
   ?>
 
