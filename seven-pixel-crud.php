@@ -109,7 +109,7 @@ function crudAdminPage() {
 	$name = $_POST['newname'];
 	$email = $_POST['newemail'];
 	$fecha = $_POST['newfecha'];
-	$wpdb->query("INSERT INTO $table_name(name,email) VALUES('$name','$email','$fecha')");
+	$wpdb->query("INSERT INTO $table_name(name,email,fecha) VALUES('$name','$email','$fecha')");
 	if($wpdb->last_error !== '') :
 		$wpdb->print_error();
 	endif;
