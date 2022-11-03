@@ -50,6 +50,7 @@ function activate_seven_pixel_crud() {
 	`user_id` int(11) NOT NULL AUTO_INCREMENT,
 	`name` varchar(220) DEFAULT NULL,
 	`email` varchar(220) DEFAULT NULL,
+	`fecha` datetime DEFAULT NULL,
 	PRIMARY KEY(user_id)
 	) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 	";
@@ -107,14 +108,18 @@ function crudAdminPage() {
   if (isset($_POST['newsubmit'])) {
 	$name = $_POST['newname'];
 	$email = $_POST['newemail'];
-	$wpdb->query("INSERT INTO $table_name(name,email) VALUES('$name','$email')");
+	$fecha = $_POST['newfecha'];
+	$wpdb->query("INSERT INTO $table_name(name,email) VALUES('$name','$email','$fecha')");
+  }
+  if (isset($_POST['updatesubmit'])) {
 	//echo "<script>location.replace('admin.php?page=seven-pixel-crud/seven-pixel-crud.php');</script>";
   }
   if (isset($_POST['uptsubmit'])) {
 	$id = $_POST['uptid'];
 	$name = $_POST['uptname'];
 	$email = $_POST['uptemail'];
-	$wpdb->query("UPDATE $table_name SET name='$name',email='$email' WHERE user_id='$id'");
+	$fecha = $_POST['uptfecha'];
+	$wpdb->query("UPDATE $table_name SET name='$name',email='$email', fecha='$fecha' WHERE user_id='$id'");
 	echo "<script>location.replace('admin.php?page=seven-pixel-crud/seven-pixel-crud.php');</script>";
   }
   if (isset($_GET['del'])) {
@@ -129,9 +134,10 @@ function crudAdminPage() {
    <table class="wp-list-table widefat striped">
 	   <thead>
 		   <tr>
-			   <th width="25%">User ID</th>
-			   <th width="25%">Nombre-</th>
+			   <th width="15%">User ID</th>
+			   <th width="20%">Nombre</th>
 			   <th width="25%">Email</th>
+			   <th width="15%">Fecha</th>
 			   <th width="25%">Acciones</th>
 		   </tr>
 	   </thead>
@@ -141,6 +147,7 @@ function crudAdminPage() {
 				   <td><input type="text" value="AUTO_GENERATED" disabled></td>
 				   <td><input type="text" id="newname" name="newname"></td>
 				   <td><input type="text" id="newemail" name="newemail"></td>
+				   <td><input type="date" id="newfecha" name="newfecha"></td>
 				   <td><button id="newsubmit" name="newsubmit" type="submit">INSERTAR</button></td>
 			   </tr>
 		   </form>
@@ -149,10 +156,11 @@ function crudAdminPage() {
 		  foreach ($result as $print) {
 			echo "
 			  <tr>
-				<td width='25%'>$print->user_id</td>
-				<td width='25%'>$print->name</td>
-				<td width='25%'>$print->email</td>
-				<td width='25%'><a href='admin.php?page=seven-pixel-crud/seven-pixel-crud.php&upt=$print->user_id'><button type='button'>UPDATE</button></a> <a href='admin.php?page=seven-pixel-crud/seven-pixel-crud.php&del=$print->user_id'><button type='button'>BORRAR</button></a></td>
+				<td width='20%'>$print->user_id</td>
+				<td width='20%'>$print->name</td>
+				<td width='20%'>$print->email</td>
+				<td width='20%'>$print->fecha</td>
+				<td width='20%'><a href='admin.php?page=seven-pixel-crud/seven-pixel-crud.php&upt=$print->user_id'><button type='button'>UPDATE</button></a> <a href='admin.php?page=seven-pixel-crud/seven-pixel-crud.php&del=$print->user_id'><button type='button'>BORRAR</button></a></td>
 			  </tr>
 			";
 		  }
@@ -168,24 +176,27 @@ function crudAdminPage() {
 		foreach($result as $print) {
 		  $name = $print->name;
 		  $email = $print->email;
+		  $fecha = $print->fecha;
 		}
 		echo "
 		<table class='wp-list-table widefat striped'>
 		  <thead>
 			<tr>
-			  <th width='25%'>User ID</th>
-			  <th width='25%'>Name</th>
-			  <th width='25%'>Email Address</th>
-			  <th width='25%'>Actions</th>
+			  <th width='20%'>User ID</th>
+			  <th width='20%'>Name</th>
+			  <th width='20%'>Email Address</th>
+			  <th width='20%'>Fecha</th>
+			  <th width='20%'>Actions</th>
 			</tr>
 		  </thead>
 		  <tbody>
 			<form action='' method='post'>
 			  <tr>
-				<td width='25%'>$print->user_id <input type='hidden' id='uptid' name='uptid' value='$print->user_id'></td>
-				<td width='25%'><input type='text' id='uptname' name='uptname' value='$print->name'></td>
-				<td width='25%'><input type='text' id='uptemail' name='uptemail' value='$print->email'></td>
-				<td width='25%'><button id='uptsubmit' name='uptsubmit' type='submit'>UPDATE</button> <a href='admin.php?page=seven-pixel-crud/seven-pixel-crud.php'><button type='button'>CANCEL</button></a></td>
+				<td width='20%'>$print->user_id <input type='hidden' id='uptid' name='uptid' value='$print->user_id'></td>
+				<td width='20%'><input type='text' id='uptname' name='uptname' value='$print->name'></td>
+				<td width='20%'><input type='text' id='uptemail' name='uptemail' value='$print->email'></td>
+				<td width='20%'><input type='date' id='uptfecha' name='uptfecha' value='$print->fecha'></td>
+				<td width='20%'><button id='uptsubmit' name='uptsubmit' type='submit'>UPDATE</button> <a href='admin.php?page=seven-pixel-crud/seven-pixel-crud.php'><button type='button'>CANCEL</button></a></td>
 			  </tr>
 			</form>
 		  </tbody>
