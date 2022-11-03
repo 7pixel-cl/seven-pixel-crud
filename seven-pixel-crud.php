@@ -45,7 +45,7 @@ function activate_seven_pixel_crud() {
 	require_once plugin_dir_path( __FILE__ ) . 'includes/class-seven-pixel-crud-activator.php';
 	global $wpdb;
 	$charset_collate = $wpdb->get_charset_collate();
-	$table_name = $wpdb->prefix . 'wpnl_crud';
+	$table_name = $wpdb->prefix . 'crud';
 	$sql = "CREATE TABLE `$table_name` (
 	`user_id` int(11) NOT NULL AUTO_INCREMENT,
 	`name` varchar(220) DEFAULT NULL,
