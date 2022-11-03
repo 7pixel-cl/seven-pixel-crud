@@ -110,6 +110,9 @@ function crudAdminPage() {
 	$email = $_POST['newemail'];
 	$fecha = $_POST['newfecha'];
 	$wpdb->query("INSERT INTO $table_name(name,email) VALUES('$name','$email','$fecha')");
+	if($wpdb->last_error !== '') :
+		$wpdb->print_error();
+	endif;
   }
   if (isset($_POST['updatesubmit'])) {
 	//echo "<script>location.replace('admin.php?page=seven-pixel-crud/seven-pixel-crud.php');</script>";
