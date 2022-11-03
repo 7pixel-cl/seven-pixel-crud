@@ -113,6 +113,9 @@ function crudAdminPage() {
 	if($wpdb->last_error !== '') :
 		$wpdb->print_error();
 	endif;
+	echo $wpdb->last_error;
+	echo $wpdb->show_errors;
+	echo $wpdb->last_query;
   }
   if (isset($_POST['updatesubmit'])) {
 	//echo "<script>location.replace('admin.php?page=seven-pixel-crud/seven-pixel-crud.php');</script>";
