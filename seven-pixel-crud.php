@@ -43,7 +43,22 @@ define( 'SEVEN_PIXEL_CRUD_VERSION', '1.0.0' );
  */
 function activate_seven_pixel_crud() {
 	require_once plugin_dir_path( __FILE__ ) . 'includes/class-seven-pixel-crud-activator.php';
+	global $wpdb;
+	$charset_collate = $wpdb->get_charset_collate();
+	$table_name = $wpdb->prefix . 'wpnl_crud';
+	$sql = "CREATE TABLE `$table_name` (
+	`user_id` int(11) NOT NULL AUTO_INCREMENT,
+	`name` varchar(220) DEFAULT NULL,
+	`email` varchar(220) DEFAULT NULL,
+	PRIMARY KEY(user_id)
+	) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+	";
+	if ($wpdb->get_var("SHOW TABLES LIKE '$table_name'") != $table_name) {
+	require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+	dbDelta($sql);
+	}
 	Seven_Pixel_Crud_Activator::activate();
+
 }
 
 /**
