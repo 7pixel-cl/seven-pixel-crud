@@ -95,6 +95,8 @@ function run_seven_pixel_crud() {
 
 }
 run_seven_pixel_crud();
+
+
 add_action('admin_menu', 'addAdminPageContent');
 function addAdminPageContent() {
   add_menu_page('CRUD', 'CRUD', 'manage_options' ,__FILE__, 'crudAdminPage', 'dashicons-wordpress');
@@ -106,7 +108,7 @@ function crudAdminPage() {
 	$name = $_POST['newname'];
 	$email = $_POST['newemail'];
 	$wpdb->query("INSERT INTO $table_name(name,email) VALUES('$name','$email')");
-	echo "<script>location.replace('admin.php?page=seven-pixel-crud.php');</script>";
+	echo "<script>location.replace('admin.php?page=seven-pixel-crud%2Fseven-pixel-crud.php');</script>";
   }
   if (isset($_POST['uptsubmit'])) {
 	$id = $_POST['uptid'];
@@ -121,15 +123,16 @@ function crudAdminPage() {
 	echo "<script>location.replace('admin.php?page=seven-pixel-crud.php');</script>";
   }
   ?>
+
 <div class="wrap">
-   <h2>CRUD Operations</h2>
+   <h2>CRUD Wordpress</h2>
    <table class="wp-list-table widefat striped">
 	   <thead>
 		   <tr>
 			   <th width="25%">User ID</th>
-			   <th width="25%">Name</th>
-			   <th width="25%">Email Address</th>
-			   <th width="25%">Actions</th>
+			   <th width="25%">Nombre-</th>
+			   <th width="25%">Email</th>
+			   <th width="25%">Acciones</th>
 		   </tr>
 	   </thead>
 	   <tbody>
@@ -138,7 +141,7 @@ function crudAdminPage() {
 				   <td><input type="text" value="AUTO_GENERATED" disabled></td>
 				   <td><input type="text" id="newname" name="newname"></td>
 				   <td><input type="text" id="newemail" name="newemail"></td>
-				   <td><button id="newsubmit" name="newsubmit" type="submit">INSERT</button></td>
+				   <td><button id="newsubmit" name="newsubmit" type="submit">INSERTAR</button></td>
 			   </tr>
 		   </form>
 		   <?php
@@ -149,7 +152,7 @@ function crudAdminPage() {
 				<td width='25%'>$print->user_id</td>
 				<td width='25%'>$print->name</td>
 				<td width='25%'>$print->email</td>
-				<td width='25%'><a href='admin.php?page=seven-pixel-crud.php&upt=$print->user_id'><button type='button'>UPDATE</button></a> <a href='admin.php?page=seven-pixel-crud.php&del=$print->user_id'><button type='button'>DELETE</button></a></td>
+				<td width='25%'><a href='admin.php?page=seven-pixel-crud.php&upt=$print->user_id'><button type='button'>UPDATE</button></a> <a href='admin.php?page=seven-pixel-crud.php&del=$print->user_id'><button type='button'>BORRAR</button></a></td>
 			  </tr>
 			";
 		  }
@@ -182,7 +185,7 @@ function crudAdminPage() {
 				<td width='25%'>$print->user_id <input type='hidden' id='uptid' name='uptid' value='$print->user_id'></td>
 				<td width='25%'><input type='text' id='uptname' name='uptname' value='$print->name'></td>
 				<td width='25%'><input type='text' id='uptemail' name='uptemail' value='$print->email'></td>
-				<td width='25%'><button id='uptsubmit' name='uptsubmit' type='submit'>UPDATE</button> <a href='admin.php?page=seven-pixel-crud.php'><button type='button'>CANCEL</button></a></td>
+				<td width='25%'><button id='uptsubmit' name='uptsubmit' type='submit'>UPDATE</button> <a href='admin.php?page=seven-pixel-crud%2Fseven-pixel-crud.php'><button type='button'>CANCEL</button></a></td>
 			  </tr>
 			</form>
 		  </tbody>
